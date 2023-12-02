@@ -22,7 +22,7 @@ pool.query('SELECT NOW()', (err, res) => {
 function createGame(title, description, developer, year) {
   pool.query(`
     INSERT INTO media (title, description, type, year)
-    VALUES ($1, $2, 'game', $2)
+    VALUES ($1, $2, 'game', $3)
     RETURNING media_id
   `, [title, description, year], (err, res) => {
     if (err) {

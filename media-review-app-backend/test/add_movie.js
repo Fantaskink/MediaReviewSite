@@ -43,4 +43,4 @@ function createMovie(title, director, year) {
   }
   
 //createMovie('Barbie', 'Greta Gerwig', 2023)
-createMovie('Oppenheimer', 'Christopher Nolan', 2023)
+createMovie('Oppenheimer', 'lorem ipsum dolor', 'Christopher Nolan', 2023)
