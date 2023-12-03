@@ -1,5 +1,17 @@
 import axiosInstance from '../axios/axiosInstance'
 
+async function getLibraryCards(pageNumber: number) {
+  try {
+    const response = await axiosInstance.get('/api/library/getcards/' + pageNumber)
+    return response.data
+  } catch (error) {
+    console.error('Error retrieving library cards:', error)
+    throw error
+  }
+}
+
+/*
+
 async function getAllLibraryItems() {
   try {
     const response = await axiosInstance.get('/api/library/getall')
@@ -9,6 +21,7 @@ async function getAllLibraryItems() {
     throw error
   }
 }
+*/
 
 async function getAllLibraryItemsCount() {
   try {
@@ -20,4 +33,4 @@ async function getAllLibraryItemsCount() {
   }
 }
 
-export { getAllLibraryItems, getAllLibraryItemsCount }
+export { getLibraryCards, getAllLibraryItemsCount }

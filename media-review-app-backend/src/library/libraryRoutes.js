@@ -2,6 +2,22 @@ const express = require('express');
 const router = express.Router();
 const libraryController = require('./libraryController');
 
+router.get('/library/getcards/:pageNumber', (req, res) => {
+  const pageNumber = parseInt(req.params.pageNumber);
+
+  if (isNaN(pageNumber) || pageNumber <= 0) {
+    return res.status(400).json({ error: 'Invalid page number' });
+  }
+
+  libraryController.getLibraryCards(pageNumber, (err, media) => {
+    if (err) {
+      return res.status(500).json({ error: 'Error fetching library cards' });
+    }
+    res.json(media);
+  });
+});
+
+
 // Route to get all library media
 router.get('/library/getall', (req, res) => {
     // Use the getAllGames function and provide a callback

@@ -1,19 +1,18 @@
 import { useState, useEffect } from 'react'
-import { getAllLibraryItems, getAllLibraryItemsCount } from './LibraryAPI'
+import { getLibraryCards, getAllLibraryItemsCount } from './LibraryAPI'
+import './LibraryPage.css'
 
 interface LibraryItem {
   media_id: number;
   title: string;
-  description: string;
-  type: string;
-  year: number;
-  rating: number;
-  // Add other properties as per your actual data structure
+  thumbnail_url: string;
 }
 
 function LibraryPage() {
   const [libraryItems, setLibraryItems] = useState<LibraryItem[]>([]) // Set initial state as an empty array
   const [itemCount, setItemCount] = useState<number>(0) // Set initial state as 0
+  const [pageNumber, setPageNumber] = useState<number>(1) // Set initial state as 1
+  
 
   useEffect(() => {
     // Fetch library items count when the component mounts
@@ -29,7 +28,7 @@ function LibraryPage() {
 
   useEffect(() => {
     // Fetch library items when the component mounts
-    getAllLibraryItems()
+    getLibraryCards(pageNumber)
       .then((items) => {
         // Update the state with the fetched library items
         setLibraryItems(items)
@@ -42,8 +41,35 @@ function LibraryPage() {
   return (
     <div>
       <h1>Library</h1>
-      < p>Number of items in library: {itemCount}</p>
-      <pre>{JSON.stringify(libraryItems, null, ' ')}</pre>
+      <p>Number of items in library: {itemCount}</p>
+      <p>Page number: {pageNumber}</p>
+      <button
+        onClick={() => {
+          setPageNumber(pageNumber - 1)
+        }}
+        disabled={pageNumber === 1}
+      > 
+        Previous page
+      </button>
+      <button
+        onClick={() => {
+          setPageNumber(pageNumber + 1)
+        }}
+        disabled={pageNumber === Math.ceil(itemCount / 20)}
+      >
+        Next page
+      </button>
+      <div className='grid-container'>
+        {libraryItems.map((item) => (
+          <div key={item.media_id} className='grid-item'>
+            <img
+              className='grid-item-image'
+              src={item.thumbnail_url}
+              alt={item.title}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

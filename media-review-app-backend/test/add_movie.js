@@ -42,5 +42,6 @@ function createMovie(title, thumbnail_url, description, director, year) {
     });
   }
   
-createMovie('Barbie', 'thumnail_placeholder', 'lorem ipsum', 'Greta Gerwig', 2023)
-createMovie('Oppenheimer', 'thumbnail_placeholder', 'lorem ipsum dolor', 'Christopher Nolan', 2023)
+//createMovie('Barbie', 'thumnail_placeholder', 'lorem ipsum', 'Greta Gerwig', 2023)
+//createMovie('Oppenheimer', 'thumbnail_placeholder', 'lorem ipsum dolor', 'Christopher Nolan', 2023)
+createMovie('Inception', 'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg', 'lorem ipsum dolor', 'Nolan', 2023)

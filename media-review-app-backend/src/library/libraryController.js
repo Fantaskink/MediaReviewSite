@@ -1,5 +1,31 @@
 const pool = require('../db/db');
 
+// Each page contains 72 cards. The first page contains cards 1-72, the second page contains cards 73-144, etc.
+const getLibraryCards = (pageNumber, callback) => {
+    const offset = (pageNumber - 1) * 72;
+    pool.query(
+        `SELECT media_id, title, thumbnail_url FROM media
+         ORDER BY title ASC LIMIT 72 OFFSET ${offset}`,
+        (err, res) => {
+            if (err) {
+                console.error('Error getting media:', err);
+                callback(err, null);
+            } else {
+                console.log('Got media:', res.rows);
+                callback(null, res.rows);
+            }
+        }
+    );
+}
+
+getLibraryCards(1, (err, res) => {
+    if (err) {
+        console.error('Error getting media:', err);
+    } else {
+        console.log('Got media:', res);
+    }
+});
+
 const getAllMedia = (callback) => {
     pool.query(
       `SELECT * FROM media`,
@@ -94,6 +120,7 @@ const addMovie = (title, thumbnail_url, description, director, year, callback) =
   
 
 module.exports = {
+    getLibraryCards,
     getAllMedia,
     getAllMediaCount,
     addMovie,
