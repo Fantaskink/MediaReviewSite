@@ -42,8 +42,9 @@ function LibraryPage() {
     <div>
       <h1>Library</h1>
       <p>Number of items in library: {itemCount}</p>
-      <p>Page number: {pageNumber}</p>
-      <button
+      <p>Page {pageNumber} of {Math.ceil(itemCount / 72)}</p>
+
+      <button className='prev-page-button'
         onClick={() => {
           setPageNumber(pageNumber - 1)
         }}
@@ -51,14 +52,16 @@ function LibraryPage() {
       > 
         Previous page
       </button>
-      <button
+
+      <button className='next-page-button'
         onClick={() => {
           setPageNumber(pageNumber + 1)
         }}
-        disabled={pageNumber === Math.ceil(itemCount / 20)}
+        disabled={pageNumber === Math.ceil(itemCount / 72)}
       >
         Next page
       </button>
+
       <div className='grid-container'>
         {libraryItems.map((item) => (
           <div key={item.media_id} className='grid-item'>
@@ -70,6 +73,7 @@ function LibraryPage() {
           </div>
         ))}
       </div>
+      
     </div>
   )
 }
