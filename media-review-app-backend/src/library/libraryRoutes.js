@@ -24,9 +24,24 @@ router.get('/library/getallcount', (req, res) => {
     });
   });
 
-// Route to create a new library item
-//router.post('/', libraryController.createItem);
+router.post('/admin/addmovie', (req, res) => {
+    const { title, thumbnail_url, description, director, year } = req.body;
+    libraryController.addMovie(title, thumbnail_url, description, director, year, (err, media) => {
+      if (err) {
+        return res.status(500).json({ error: 'Error adding movie' });
+      }
+      res.json(media);
+    });
+  });
 
-// Add more routes as needed for updating, deleting, etc.
+router.post('/admin/addgame', (req, res) => {
+    const { title, thumbnail_url, description, developer, year } = req.body;
+    libraryController.addGame(title, thumbnail_url, description, developer, year, (err, media) => {
+      if (err) {
+        return res.status(500).json({ error: 'Error adding game' });
+      }
+      res.json(media);
+    });
+  });
 
 module.exports = router;
