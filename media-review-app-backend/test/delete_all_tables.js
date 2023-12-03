@@ -4,7 +4,7 @@ const { Pool } = require('pg');
 const pool = new Pool({
   user: 'johan',
   host: 'localhost',
-  database: 'johan',
+  database: 'media',
   password: '',
   port: 5432, // PostgreSQL default port
 });
@@ -17,6 +17,21 @@ pool.query('SELECT NOW()', (err, res) => {
       console.log('Connected to PostgreSQL:', res.rows[0].now);
     }
   });
+
+  /*
+pool.query(`
+  DROP TABLE IF EXISTS users;
+  `
+  ), (err, res) => {
+    if (err) {
+      console.error('Error deleting users table:', err);
+    } else {
+      console.log('Deleted users table:', res);
+    }
+  }
+
+*/
+
 
 // Delete all tables
 pool.query(`

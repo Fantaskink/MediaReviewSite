@@ -4,7 +4,7 @@ const { Pool } = require('pg');
 const pool = new Pool({
   user: 'johan',
   host: 'localhost',
-  database: 'johan',
+  database: 'media',
   password: '',
   port: 5432, // PostgreSQL default port
 });
@@ -18,12 +18,12 @@ pool.query('SELECT NOW()', (err, res) => {
   }
 });
 
-function createMovie(title, director, year) {
+function createMovie(title, thumbnail_url, description, director, year) {
     pool.query(`
-      INSERT INTO media (title, type, year)
-      VALUES ($1, 'movie', $2)
+      INSERT INTO media (title, thumbnail_url, description, type, year)
+      VALUES ($1, $2, $3, 'movie', $4)
       RETURNING media_id
-    `, [title, year], (err, res) => {
+    `, [title, thumbnail_url, description, year], (err, res) => {
       if (err) {
         console.error('Error inserting movie:', err);
       } else {
@@ -42,5 +42,5 @@ function createMovie(title, director, year) {
     });
   }
   
-//createMovie('Barbie', 'Greta Gerwig', 2023)
-createMovie('Oppenheimer', 'lorem ipsum dolor', 'Christopher Nolan', 2023)
+createMovie('Barbie', 'thumnail_placeholder', 'lorem ipsum', 'Greta Gerwig', 2023)
+createMovie('Oppenheimer', 'thumbnail_url', 'lorem ipsum dolor', 'Christopher Nolan', 2023)

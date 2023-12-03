@@ -4,7 +4,7 @@ const { Pool } = require('pg');
 const pool = new Pool({
   user: 'johan',
   host: 'localhost',
-  database: 'johan',
+  database: 'media',
   password: '',
   port: 5432, // PostgreSQL default port
 });
@@ -19,12 +19,12 @@ pool.query('SELECT NOW()', (err, res) => {
 });
 
 // Add game
-function createGame(title, description, developer, year) {
+function createGame(title, thumbnail_url, description, developer, year) {
   pool.query(`
-    INSERT INTO media (title, description, type, year)
-    VALUES ($1, $2, 'game', $3)
+    INSERT INTO media (title, thumbnail_url, description, type, year)
+    VALUES ($1, $2, $3, 'game', $4)
     RETURNING media_id
-  `, [title, description, year], (err, res) => {
+  `, [title, thumbnail_url, description, year], (err, res) => {
     if (err) {
       console.error('Error inserting game:', err);
     } else {
@@ -43,4 +43,4 @@ function createGame(title, description, developer, year) {
   });
 }
 
-createGame('The Legend of Zelda: Breath of the Wild', 'lorem ipsum dolor sit amet', 'Nintendo', 2017)
+createGame('The Legend of Zelda: Breath of the Wild', 'thumbnail_placeholder', 'lorem ipsum dolor sit amet', 'Nintendo', 2017)
