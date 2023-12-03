@@ -43,4 +43,4 @@ function createMovie(title, thumbnail_url, description, director, year) {
   }
   
 createMovie('Barbie', 'thumnail_placeholder', 'lorem ipsum', 'Greta Gerwig', 2023)
-createMovie('Oppenheimer', 'thumbnail_url', 'lorem ipsum dolor', 'Christopher Nolan', 2023)
+createMovie('Oppenheimer', 'thumbnail_placeholder', 'lorem ipsum dolor', 'Christopher Nolan', 2023)
