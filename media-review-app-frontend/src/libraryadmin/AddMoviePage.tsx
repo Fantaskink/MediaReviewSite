@@ -5,6 +5,7 @@ interface Movie {
   title: string;
   thumbnail_url: string;
   description: string;
+  director: string;
   year: number;
 }
 
@@ -13,6 +14,7 @@ const AddMoviePage: React.FC = () => {
     title: '',
     thumbnail_url: '',
     description: '',
+    director: '',
     year: 0,
   })
 
@@ -32,6 +34,7 @@ const AddMoviePage: React.FC = () => {
         title: '',
         thumbnail_url: '',
         description: '',
+        director: '',
         year: 0,
       })
       alert('Movie added successfully!')
@@ -71,6 +74,16 @@ const AddMoviePage: React.FC = () => {
             id="description"
             name="description"
             value={formData.description}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="director">Director</label>
+          <input
+            type="text"
+            id="director"
+            name="director"
+            value={formData.director}
             onChange={handleInputChange}
           />
         </div>
