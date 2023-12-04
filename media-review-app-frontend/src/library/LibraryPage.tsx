@@ -79,7 +79,6 @@ function LibraryPage() {
           
         ))}
       </div>
-
     </div>
   )
 }

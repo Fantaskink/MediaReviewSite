@@ -8,7 +8,7 @@ function AdminPage() {
         <Nav.Link href="/admin/addbookpage">Add Book</Nav.Link>
       </button>
       <button>
-        <Nav.Link href="/admin/addmoviepage">Add Movie</Nav.Link>
+        <Nav.Link href="/admin/addfilmpage">Add Film</Nav.Link>
       </button>
       
     </div>

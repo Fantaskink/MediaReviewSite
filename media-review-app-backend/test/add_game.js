@@ -44,3 +44,4 @@ function createGame(media_url, title, thumbnail_url, description, developer, yea
 }
 
 createGame('the-legend-of-zelda-breath-of-the-wild', 'The Legend of Zelda: Breath of the Wild', 'https://cdn02.plentymarkets.com/qozbgypaugq8/item/images/1613/full/PSTR-ZELDA005.jpg', 'lorem ipsum dolor sit amet', 'Nintendo', 2017)
+createGame('super-mario-odyssey', 'Super Mario Odyssey', 'https://static.posters.cz/image/750/plakater/super-mario-odyssey-collage-i50045.jpg', 'lorem ipsum dolor sit amet', 'Nintendo', 2017)
