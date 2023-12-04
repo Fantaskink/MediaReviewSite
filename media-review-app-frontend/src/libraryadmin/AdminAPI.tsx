@@ -1,6 +1,7 @@
 import axiosInstance from '../axios/axiosInstance'
 
 interface Film {
+    media_url: string;
     title: string;
     thumbnail_url: string;
     description: string;

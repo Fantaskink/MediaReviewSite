@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const filmController = require('./filmController');
 
-router.get('/film/getdata/:filmURL', (req, res) => {
-    const filmURL = req.params.filmURL;
+router.get('/film/getdata/:mediaURL', (req, res) => {
+    const mediaURL = req.params.mediaURL;
     
-    filmController.getFilmData(filmURL, (err, media) => {
+    filmController.getFilmData(mediaURL, (err, media) => {
         if (err) {
         return res.status(500).json({ error: 'Error fetching film' });
         }

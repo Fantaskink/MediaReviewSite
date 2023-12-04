@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { addFilm } from './AdminAPI'
 
 interface Film {
+  media_url: string;
   title: string;
   thumbnail_url: string;
   description: string;
@@ -11,6 +12,7 @@ interface Film {
 
 const AddFilmPage: React.FC = () => {
   const [formData, setFormData] = useState<Film>({
+    media_url: '',
     title: '',
     thumbnail_url: '',
     description: '',
@@ -31,6 +33,7 @@ const AddFilmPage: React.FC = () => {
     try {
       await addFilm(formData)
       setFormData({
+        media_url: '',
         title: '',
         thumbnail_url: '',
         description: '',
@@ -48,6 +51,16 @@ const AddFilmPage: React.FC = () => {
     <div>
       <h2>Add Film</h2>
       <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="media_url">Media URL</label>
+          <input
+            type="text"
+            id="media_url"
+            name="media_url"
+            value={formData.media_url}
+            onChange={handleInputChange}
+          />
+        </div>
         <div>
           <label htmlFor="title">Title</label>
           <input

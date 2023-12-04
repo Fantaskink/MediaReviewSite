@@ -49,12 +49,12 @@ const getAllMedia = (callback) => {
     );
   };
   
-const addFilm = (title, thumbnail_url, description, director, year, callback) => {
+const addFilm = (media_url, title, thumbnail_url, description, director, year, callback) => {
     pool.query(
-      `INSERT INTO media (title, thumbnail_url, description, type, year)
-       VALUES ($1, $2, $3, 'film', $4)
+      `INSERT INTO media (media_url, title, thumbnail_url, description, type, year)
+       VALUES ($1, $2, $3, $4, 'film', $5)
        RETURNING media_id`,
-      [title, thumbnail_url, description, year],
+      [media_url, title, thumbnail_url, description, year],
       (err, res) => {
         if (err) {
           console.error('Error inserting film:', err);
@@ -80,12 +80,12 @@ const addFilm = (title, thumbnail_url, description, director, year, callback) =>
     );
   };
   
-  const addBook = (title, thumbnail_url, description, author, year, callback) => {
+  const addBook = (media_url, title, thumbnail_url, description, author, year, callback) => {
     pool.query(
-      `INSERT INTO media (title, thumbnail_url, description, type, year)
-       VALUES ($1, $2, $3, 'book', $4)
+      `INSERT INTO media (media_url, title, thumbnail_url, description, type, year)
+       VALUES ($1, $2, $3, $4, 'book', $5)
        RETURNING media_id`,
-      [title, thumbnail_url, description, year],
+      [media_url, title, thumbnail_url, description, year],
       (err, res) => {
         if (err) {
           console.error('Error inserting book:', err);

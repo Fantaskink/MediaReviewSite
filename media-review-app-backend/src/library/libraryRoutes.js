@@ -41,8 +41,8 @@ router.get('/library/getallcount', (req, res) => {
   });
 
 router.post('/admin/addfilm', (req, res) => {
-    const { title, thumbnail_url, description, director, year } = req.body;
-    libraryController.addFilm(title, thumbnail_url, description, director, year, (err, media) => {
+    const { media_url, title, thumbnail_url, description, director, year } = req.body;
+    libraryController.addFilm(media_url, title, thumbnail_url, description, director, year, (err, media) => {
       if (err) {
         return res.status(500).json({ error: 'Error adding film' });
       }
@@ -51,8 +51,8 @@ router.post('/admin/addfilm', (req, res) => {
   });
 
 router.post('/admin/addgame', (req, res) => {
-    const { title, thumbnail_url, description, developer, year } = req.body;
-    libraryController.addGame(title, thumbnail_url, description, developer, year, (err, media) => {
+    const { media_url, title, thumbnail_url, description, developer, year } = req.body;
+    libraryController.addGame(media_url, title, thumbnail_url, description, developer, year, (err, media) => {
       if (err) {
         return res.status(500).json({ error: 'Error adding game' });
       }
