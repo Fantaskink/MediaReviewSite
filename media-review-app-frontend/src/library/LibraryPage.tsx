@@ -67,16 +67,15 @@ function LibraryPage() {
 
       <div className='grid-container'>
         {libraryItems.map((item) => (
-          <div key={item.media_id} className='grid-item'>
-            <Link to={`/${item.type}/${item.media_url}`}>
+          <Link key={item.media_id} to={`/${item.type}/${item.media_url}`}>
+            <div className='grid-item'>
               <img
                 className='grid-item-image'
                 src={item.thumbnail_url}
                 alt={item.title}
               />
-            </Link>
-          </div>
-          
+            </div>
+          </Link>
         ))}
       </div>
     </div>
