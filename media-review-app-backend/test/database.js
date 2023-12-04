@@ -55,18 +55,18 @@ pool.query(`
 
     
 
-// Create movies table
+// Create films table
 pool.query(`
-  CREATE TABLE IF NOT EXISTS movies (
-    movie_id SERIAL PRIMARY KEY,
+  CREATE TABLE IF NOT EXISTS films (
+    film_id SERIAL PRIMARY KEY,
     director VARCHAR(255) NOT NULL,
     media_id INTEGER REFERENCES media(media_id)
   );
 `, (err, res) => {
   if (err) {
-    console.error('Error creating movies table:', err);
+    console.error('Error creating films table:', err);
   } else {
-    console.log('Created movies table:', res);
+    console.log('Created films table:', res);
   }
 });
 

@@ -37,7 +37,7 @@ pool.query(`
 pool.query(`
   DROP TABLE IF EXISTS logs;
   DROP TABLE IF EXISTS books;
-  DROP TABLE IF EXISTS movies;
+  DROP TABLE IF EXISTS films;
   DROP TABLE IF EXISTS games;
   DROP TABLE IF EXISTS media;
 `, (err, res) => {

@@ -18,30 +18,30 @@ pool.query('SELECT NOW()', (err, res) => {
   }
 });
 
-function createMovie(media_url, title, thumbnail_url, description, director, year) {
+function createFilm(media_url, title, thumbnail_url, description, director, year) {
     pool.query(`
       INSERT INTO media (media_url, title, thumbnail_url, description, type, year)
-      VALUES ($1, $2, $3, $4, 'movie', $5)
+      VALUES ($1, $2, $3, $4, 'film', $5)
       RETURNING media_id
     `, [media_url, title, thumbnail_url, description, year], (err, res) => {
       if (err) {
-        console.error('Error inserting movie:', err);
+        console.error('Error inserting film:', err);
       } else {
         const mediaId = res.rows[0].media_id;
         pool.query(`
-          INSERT INTO movies (director, media_id)
+          INSERT INTO films (director, media_id)
           VALUES ($1, $2)
         `, [director, mediaId], (err, res) => {
           if (err) {
-            console.error('Error inserting movie:', err);
+            console.error('Error inserting film:', err);
           } else {
-            console.log('Inserted movie:', res);
+            console.log('Inserted film:', res);
           }
         });
       }
     });
   }
   
-createMovie('barbie', 'Barbie', 'https://a.ltrbxd.com/resized/film-poster/2/7/7/0/6/4/277064-barbie-0-500-0-750-crop.jpg?v=1b83dc7a71', 'lorem ipsum', 'Greta Gerwig', 2023)
-createMovie('oppenheimer', 'Oppenheimer', 'https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg', 'lorem ipsum dolor', 'Christopher Nolan', 2023)
-createMovie('inception', 'Inception', 'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg', 'lorem ipsum dolor', 'Nolan', 2023)
+createFilm('barbie', 'Barbie', 'https://a.ltrbxd.com/resized/film-poster/2/7/7/0/6/4/277064-barbie-0-500-0-750-crop.jpg?v=1b83dc7a71', 'lorem ipsum', 'Greta Gerwig', 2023)
+createFilm('oppenheimer', 'Oppenheimer', 'https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg', 'lorem ipsum dolor', 'Christopher Nolan', 2023)
+createFilm('inception', 'Inception', 'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg', 'lorem ipsum dolor', 'Nolan', 2023)

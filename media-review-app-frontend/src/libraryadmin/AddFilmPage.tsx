@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { addMovie } from './AdminAPI'
+import { addFilm } from './AdminAPI'
 
-interface Movie {
+interface Film {
   title: string;
   thumbnail_url: string;
   description: string;
@@ -9,8 +9,8 @@ interface Movie {
   year: number;
 }
 
-const AddMoviePage: React.FC = () => {
-  const [formData, setFormData] = useState<Movie>({
+const AddFilmPage: React.FC = () => {
+  const [formData, setFormData] = useState<Film>({
     title: '',
     thumbnail_url: '',
     description: '',
@@ -29,7 +29,7 @@ const AddMoviePage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      await addMovie(formData)
+      await addFilm(formData)
       setFormData({
         title: '',
         thumbnail_url: '',
@@ -37,16 +37,16 @@ const AddMoviePage: React.FC = () => {
         director: '',
         year: 0,
       })
-      alert('Movie added successfully!')
+      alert('Film added successfully!')
     } catch (error) {
-      console.error('Error adding movie:', error)
+      console.error('Error adding film:', error)
       // Handle error state or show an error message
     }
   }
 
   return (
     <div>
-      <h2>Add Movie</h2>
+      <h2>Add Film</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="title">Title</label>
@@ -97,10 +97,10 @@ const AddMoviePage: React.FC = () => {
             onChange={handleInputChange}
           />
         </div>
-        <button type="submit">Add Movie</button>
+        <button type="submit">Add Film</button>
       </form>
     </div>
   )
 }
 
-export default AddMoviePage
+export default AddFilmPage

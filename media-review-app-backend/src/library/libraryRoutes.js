@@ -40,11 +40,11 @@ router.get('/library/getallcount', (req, res) => {
     });
   });
 
-router.post('/admin/addmovie', (req, res) => {
+router.post('/admin/addfilm', (req, res) => {
     const { title, thumbnail_url, description, director, year } = req.body;
-    libraryController.addMovie(title, thumbnail_url, description, director, year, (err, media) => {
+    libraryController.addFilm(title, thumbnail_url, description, director, year, (err, media) => {
       if (err) {
-        return res.status(500).json({ error: 'Error adding movie' });
+        return res.status(500).json({ error: 'Error adding film' });
       }
       res.json(media);
     });

@@ -1,10 +1,11 @@
 import axiosInstance from '../axios/axiosInstance'
 
-interface Movie {
+interface Film {
     title: string;
     thumbnail_url: string;
     description: string;
     year: number;
+    director: string;
     }
 
 interface Book {
@@ -14,12 +15,12 @@ interface Book {
     author: string;
 }
 
-async function addMovie(movie: Movie) {
+async function addFilm(film: Film) {
   try {
-    const response = await axiosInstance.post('/api/admin/addmovie', movie)
+    const response = await axiosInstance.post('/api/admin/addfilm', film)
     return response.data
   } catch (error) {
-    console.error('Error adding movie:', error)
+    console.error('Error adding film:', error)
     throw error
   }
 }
@@ -34,4 +35,4 @@ async function addBook(book: Book) {
   }
 }
 
-export { addMovie, addBook }
+export { addFilm, addBook }

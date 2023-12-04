@@ -1,8 +1,8 @@
 import axiosInstance from '../../axios/axiosInstance'
 
-async function getMovieData(movie_url: string) {
+async function getFilmData(filmURL: string) {
   try {
-    const response = await axiosInstance.get('/api/movie/getdata/' + movie_url)
+    const response = await axiosInstance.get('/api/film/getdata/' + filmURL)
     return response.data
   } catch (error) {
     console.error('Error retrieving movie data:', error)
@@ -10,4 +10,4 @@ async function getMovieData(movie_url: string) {
   }
 }
 
-export { getMovieData }
+export { getFilmData }

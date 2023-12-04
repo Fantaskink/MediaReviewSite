@@ -18,14 +18,14 @@ pool.query('SELECT NOW()', (err, res) => {
   }
 });
 
-// Get all movies
+// Get all films
 pool.query(`
   SELECT * FROM media
-  JOIN movies ON media.media_id = movies.media_id
+  JOIN films ON media.media_id = films.media_id
 `, (err, res) => {
   if (err) {
-    console.error('Error getting movies:', err);
+    console.error('Error getting films:', err);
   } else {
-    console.log('Got movies:', res.rows);
+    console.log('Got films:', res.rows);
   }
 });
