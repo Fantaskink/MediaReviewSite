@@ -39,7 +39,7 @@ function LibraryPage() {
       .catch((error) => {
         console.error('Error fetching library items:', error)
       })
-  }) // Empty dependency array ensures the effect runs only once when the component mounts
+  },[]) // Empty dependency array ensures the effect runs only once when the component mounts
 
   return (
     <div>

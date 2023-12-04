@@ -11,7 +11,8 @@ const getLibraryCards = (pageNumber, callback) => {
                 console.error('Error getting media:', err);
                 callback(err, null);
             } else {
-                console.log('Got media:', res.rows);
+                //console.log('Got media:', res.rows);
+                console.log('Get library cards')
                 callback(null, res.rows);
             }
         }
