@@ -19,12 +19,12 @@ pool.query('SELECT NOW()', (err, res) => {
 });
 
 // Add game
-function createGame(title, thumbnail_url, description, developer, year) {
+function createGame(media_url, title, thumbnail_url, description, developer, year) {
   pool.query(`
-    INSERT INTO media (title, thumbnail_url, description, type, year)
-    VALUES ($1, $2, $3, 'game', $4)
+    INSERT INTO media (media_url, title, thumbnail_url, description, type, year)
+    VALUES ($1, $2, $3, $4, 'game', $5)
     RETURNING media_id
-  `, [title, thumbnail_url, description, year], (err, res) => {
+  `, [media_url, title, thumbnail_url, description, year], (err, res) => {
     if (err) {
       console.error('Error inserting game:', err);
     } else {
@@ -43,4 +43,4 @@ function createGame(title, thumbnail_url, description, developer, year) {
   });
 }
 
-createGame('The Legend of Zelda: Breath of the Wild', 'thumbnail_placeholder', 'lorem ipsum dolor sit amet', 'Nintendo', 2017)
+createGame('the-legend-of-zelda-breath-of-the-wild', 'The Legend of Zelda: Breath of the Wild', 'https://cdn02.plentymarkets.com/qozbgypaugq8/item/images/1613/full/PSTR-ZELDA005.jpg', 'lorem ipsum dolor sit amet', 'Nintendo', 2017)

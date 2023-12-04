@@ -22,6 +22,7 @@ pool.query('SELECT NOW()', (err, res) => {
 pool.query(`
   CREATE TABLE IF NOT EXISTS media (
     media_id SERIAL PRIMARY KEY,
+    media_url text NOT NULL,
     title VARCHAR(255) NOT NULL,
     thumbnail_url text,
     description text,

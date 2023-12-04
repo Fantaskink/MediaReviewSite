@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
 import { getLibraryCards, getAllLibraryItemsCount } from './LibraryAPI'
+import { Link } from 'react-router-dom'
 import './LibraryPage.css'
 
 interface LibraryItem {
+  media_url: string;
   media_id: number;
   title: string;
   thumbnail_url: string;
+  type: string;
 }
 
 function LibraryPage() {
@@ -36,7 +39,7 @@ function LibraryPage() {
       .catch((error) => {
         console.error('Error fetching library items:', error)
       })
-  }, []) // Empty dependency array ensures the effect runs only once when the component mounts
+  }) // Empty dependency array ensures the effect runs only once when the component mounts
 
   return (
     <div>
@@ -64,16 +67,18 @@ function LibraryPage() {
 
       <div className='grid-container'>
         {libraryItems.map((item) => (
-          <div key={item.media_id} className='grid-item'>
-            <img
-              className='grid-item-image'
-              src={item.thumbnail_url}
-              alt={item.title}
-            />
-          </div>
+          <Link to={`/${item.type}/${item.media_url}`}>
+            <div key={item.media_id} className='grid-item'>
+              <img
+                className='grid-item-image'
+                src={item.thumbnail_url}
+                alt={item.title}
+              />
+            </div>
+          </Link>
         ))}
       </div>
-      
+
     </div>
   )
 }

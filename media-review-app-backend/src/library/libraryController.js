@@ -4,7 +4,7 @@ const pool = require('../db/db');
 const getLibraryCards = (pageNumber, callback) => {
     const offset = (pageNumber - 1) * 72;
     pool.query(
-        `SELECT media_id, title, thumbnail_url FROM media
+        `SELECT media_id, media_url, title, thumbnail_url, type FROM media
          ORDER BY title ASC LIMIT 72 OFFSET ${offset}`,
         (err, res) => {
             if (err) {
@@ -17,14 +17,6 @@ const getLibraryCards = (pageNumber, callback) => {
         }
     );
 }
-
-getLibraryCards(1, (err, res) => {
-    if (err) {
-        console.error('Error getting media:', err);
-    } else {
-        console.log('Got media:', res);
-    }
-});
 
 const getAllMedia = (callback) => {
     pool.query(
