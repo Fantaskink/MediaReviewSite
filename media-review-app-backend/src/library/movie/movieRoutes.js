@@ -12,3 +12,5 @@ router.get('/movie/getdata/:movieUrl', (req, res) => {
         res.json(media);
     });
     });
+
+module.exports = router;

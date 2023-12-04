@@ -1,9 +1,10 @@
-const pool = require('../db/db');
+const pool = require('../../db/db');
 
 const getMovieData = (movieUrl, callback) => {
     pool.query(
-        `SELECT * FROM media
-         WHERE media_url = $1`,
+        `SELECT * FROM media, movies
+         WHERE media.media_id = movies.media_id
+         AND media_url = $1`,
         [movieUrl],
         (err, res) => {
         if (err) {

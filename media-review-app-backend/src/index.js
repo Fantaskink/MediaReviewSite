@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const libraryRoutes = require('./library/libraryRoutes');
+const movieRoutes = require('./library/movie/movieRoutes');
 
 
 const app = express();
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api', libraryRoutes); // Use '/api' as a prefix for your routes if desired
+app.use('/api', movieRoutes); // Use '/api' as a prefix for your routes if desired
 
 
 // Start the server
