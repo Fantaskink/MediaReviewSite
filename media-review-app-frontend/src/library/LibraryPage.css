@@ -11,21 +11,14 @@
     color: #fff;
     border-radius: 5px;
     overflow: hidden; /* Ensure content doesn't overflow */
+    outline: solid 3px transparent;
+    transition: outline-color 0.2s ease-in-out;
 }
 
 .grid-item:hover {
     background-color: #555;
     cursor: pointer;
-    animation: outlineFadeIn 0.3s forwards;
-}
-
-@keyframes outlineFadeIn {
-    0% {
-        outline-color: transparent;
-    }
-    100% {
-        outline-color: #2ac812;
-    }
+    outline-color: #30dd09;
 }
 
 .grid-item-image {
