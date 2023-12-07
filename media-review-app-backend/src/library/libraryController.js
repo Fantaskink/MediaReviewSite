@@ -1,9 +1,9 @@
-const pool = require('../db/media_db');
+const mediaPool = require('../db/media_db');
 
 // Each page contains 72 cards. The first page contains cards 1-72, the second page contains cards 73-144, etc.
 const getLibraryCards = (pageNumber, callback) => {
     const offset = (pageNumber - 1) * 72;
-    pool.query(
+    mediaPool.query(
         `SELECT media_id, media_url, title, thumbnail_url, type FROM media
          ORDER BY title ASC LIMIT 72 OFFSET ${offset}`,
         (err, res) => {
@@ -20,7 +20,7 @@ const getLibraryCards = (pageNumber, callback) => {
 }
 
 const getAllMedia = (callback) => {
-    pool.query(
+    mediaPool.query(
       `SELECT * FROM media`,
       (err, res) => {
         if (err) {
@@ -35,7 +35,7 @@ const getAllMedia = (callback) => {
   };
 
   const getAllMediaCount = (callback) => {
-    pool.query(
+    mediaPool.query(
       `SELECT COUNT(*) FROM media`,
       (err, res) => {
         if (err) {
@@ -50,7 +50,7 @@ const getAllMedia = (callback) => {
   };
   
 const addFilm = (media_url, title, thumbnail_url, description, director, year, callback) => {
-    pool.query(
+    mediaPool.query(
       `INSERT INTO media (media_url, title, thumbnail_url, description, type, year)
        VALUES ($1, $2, $3, $4, 'film', $5)
        RETURNING media_id`,
@@ -61,7 +61,7 @@ const addFilm = (media_url, title, thumbnail_url, description, director, year, c
           callback(err, null);
         } else {
           const mediaId = res.rows[0].media_id;
-          pool.query(
+          mediaPool.query(
             `INSERT INTO films (director, media_id)
              VALUES ($1, $2)`,
             [director, mediaId],
@@ -81,7 +81,7 @@ const addFilm = (media_url, title, thumbnail_url, description, director, year, c
   };
   
   const addBook = (media_url, title, thumbnail_url, description, author, year, callback) => {
-    pool.query(
+    mediaPool.query(
       `INSERT INTO media (media_url, title, thumbnail_url, description, type, year)
        VALUES ($1, $2, $3, $4, 'book', $5)
        RETURNING media_id`,
@@ -92,7 +92,7 @@ const addFilm = (media_url, title, thumbnail_url, description, director, year, c
           callback(err, null);
         } else {
           const mediaId = res.rows[0].media_id;
-          pool.query(
+          mediaPool.query(
             `INSERT INTO books (author, media_id)
              VALUES ($1, $2)`,
             [author, mediaId],
