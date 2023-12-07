@@ -1,4 +1,4 @@
-const pool = require('../db/db');
+const pool = require('../db/media_db');
 
 // Each page contains 72 cards. The first page contains cards 1-72, the second page contains cards 73-144, etc.
 const getLibraryCards = (pageNumber, callback) => {

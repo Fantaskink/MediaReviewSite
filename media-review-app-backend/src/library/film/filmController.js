@@ -1,4 +1,4 @@
-const pool = require('../../db/db');
+const pool = require('../../db/media_db');
 
 const getFilmData = (filmUrl, callback) => {
     pool.query(
