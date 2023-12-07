@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { signIn } from './SignInAPI'
+import { AxiosError } from 'axios'
 
 interface User {
     username: string;
@@ -7,6 +9,9 @@ interface User {
 }
 
 const SignInPage: React.FC = () => {
+
+  const navigate = useNavigate()
+
   const [formData, setFormData] = useState<User>({
     username: '',
     password: '',
@@ -33,15 +38,21 @@ const SignInPage: React.FC = () => {
     console.log(formData)
 
     try {
-      await signIn(formData)
+      const response = await signIn(formData)
+      if (response.token) {
+        navigate('/')
+      }
       setFormData({
         username: '',
         password: '',
       })
-      alert('User signed in successfully!')
-    } catch (error) {
-      console.error('Error signing in:', error)
-      
+      //alert('User signed in successfully!')
+    } catch (error: unknown) {
+      if (typeof error === 'object' && error !== null) {
+        const axiosError = error as AxiosError<{ error: string }>
+        console.error('Error signing in:', axiosError?.response?.data?.error)
+        alert(`Error signing in: ${axiosError?.response?.data?.error}`)
+      }
     }
   }
 
