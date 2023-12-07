@@ -18,7 +18,8 @@ function LibraryPage() {
   
 
   useEffect(() => {
-    // Fetch library items count when the component mounts
+    
+    // Fetch the library items count
     getAllLibraryItemsCount()
       .then((count) => {
         // Update the state with the fetched library items count
@@ -27,19 +28,20 @@ function LibraryPage() {
       .catch((error) => {
         console.error('Error fetching library items count:', error)
       })
-  }, []) // Empty dependency array ensures the effect runs only once when the component mounts
 
-  useEffect(() => {
-    // Fetch library items when the component mounts
+    
+  
+    // Fetch library items
     getLibraryCards(pageNumber)
       .then((items) => {
         // Update the state with the fetched library items
         setLibraryItems(items)
+        console.log('Library items', items)
       })
       .catch((error) => {
         console.error('Error fetching library items:', error)
       })
-  },[]) // Empty dependency array ensures the effect runs only once when the component mounts
+  }, []) // Empty dependency array ensures the effect runs only once when the component mounts
 
   return (
     <div>

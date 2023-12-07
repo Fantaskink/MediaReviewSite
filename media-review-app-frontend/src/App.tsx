@@ -6,6 +6,7 @@ import NavigationBar from './navigation/NavigationBar'
 import LibraryPage from './library/LibraryPage'
 import HomePage from './home/HomePage'
 import SignInPage from './sign-in/SignInPage'
+import SignUpPage from './sign-in/SignUpPage'
 import AdminPage from './libraryadmin/AdminPage'
 import AddFilmPage from './libraryadmin/AddFilmPage'
 import AddBookPage from './libraryadmin/AddBookPage'
@@ -22,6 +23,7 @@ function App() {
         <Route path="/library" element={<LibraryPage />} />
         <Route path="/film/:id" element={<FilmPage />} />
         <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/admin/addbookpage" element={<AddBookPage />} />
         <Route path="/admin/addfilmpage" element={<AddFilmPage />} />

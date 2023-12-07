@@ -11,6 +11,7 @@ function NavigationBar() {
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/library">Library</Nav.Link>
           <Nav.Link href="/sign-in">Sign In</Nav.Link>
+          <Nav.Link href="/sign-up">Sign Up</Nav.Link>
           <Nav.Link href="/admin">Admin</Nav.Link>
         </Nav>
       </Container>
