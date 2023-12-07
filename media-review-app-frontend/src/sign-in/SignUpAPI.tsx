@@ -3,7 +3,7 @@ import axiosInstance from '../axios/axiosInstance'
 interface User {
     username: string;
     password: string;
-    email: string;
+    email_address: string;
 }
 
 async function signUp(user: User) {

@@ -3,15 +3,15 @@ import { signUp } from './SignUpAPI'
 
 interface User {
     username: string;
+    email_address: string;
     password: string;
-    email: string;
 }
 
 const SignUpPage: React.FC = () => {
   const [formData, setFormData] = useState<User>({
     username: '',
+    email_address: '',
     password: '',
-    email: '',
   })
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -23,13 +23,14 @@ const SignUpPage: React.FC = () => {
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
+    console.log(formData)
     e.preventDefault()
     try {
       await signUp(formData)
       setFormData({
         username: '',
+        email_address: '',
         password: '',
-        email: '',
       })
       alert('User signed up successfully!')
     } catch (error) {
@@ -53,22 +54,22 @@ const SignUpPage: React.FC = () => {
           />
         </div>
         <div>
+          <label htmlFor="email_address">Email</label>
+          <input
+            type="text"
+            id="email_address"
+            name="email_address"
+            value={formData.email_address}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
           <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
             name="password"
             value={formData.password}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            type="text"
-            id="email"
-            name="email"
-            value={formData.email}
             onChange={handleInputChange}
           />
         </div>
