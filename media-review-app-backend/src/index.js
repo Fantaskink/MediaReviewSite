@@ -3,6 +3,7 @@ const cors = require('cors');
 const libraryRoutes = require('./library/libraryRoutes');
 const filmRoutes = require('./library/film/filmRoutes');
 const signUpRoutes = require('./auth/signUpRoutes');
+const signInRoutes = require('./auth/signInRoutes');
 
 const app = express();
 const port = 3000;
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use('/api', libraryRoutes); // Use '/api' as a prefix for your routes if desired
 app.use('/api', filmRoutes); 
 app.use('/api', signUpRoutes); 
+app.use('/api', signInRoutes);
 
 
 // Start the server

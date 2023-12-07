@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { signUp } from './SignUpAPI'
 
 interface User {
@@ -23,8 +23,17 @@ const SignUpPage: React.FC = () => {
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    console.log(formData)
+    
     e.preventDefault()
+
+    // Check if any of the form fields are empty
+    if (!formData.username || !formData.email_address || !formData.password) {
+      alert('All fields are required')
+      return
+    }
+
+    console.log(formData)
+
     try {
       await signUp(formData)
       setFormData({

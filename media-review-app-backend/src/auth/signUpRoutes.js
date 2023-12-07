@@ -4,6 +4,9 @@ const signUpController = require('./signUpController');
 
 router.post('/signup', async (req, res) => {
     const { username, email_address, password } = req.body;
+    if (!username || !email_address || !password) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
   
     try {
       const newUser = await signUpController.signUp(username, email_address, password);
