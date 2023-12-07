@@ -1,5 +1,6 @@
 const pool = require('../db/user_db');
 const bcrypt = require('bcrypt'); // For password hashing
+const jwt = require('jsonwebtoken');
 
 const signIn = async (username, password) => {
     try {
@@ -13,7 +14,10 @@ const signIn = async (username, password) => {
         throw new Error('Incorrect password');
         }
     
-        return user;
+        // TODO: Add secret key to .env file
+        const token = jwt.sign({ id: user.id }, 'secretkey', { expiresIn: '30d' });
+        
+        return { token, user };
     } catch (error) {
         throw error;
     }
