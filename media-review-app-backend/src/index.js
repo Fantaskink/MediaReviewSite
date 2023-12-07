@@ -5,6 +5,11 @@ const filmRoutes = require('./library/film/filmRoutes');
 const signUpRoutes = require('./auth/signUpRoutes');
 const signInRoutes = require('./auth/signInRoutes');
 
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`
+});
+console.log(`Server is running in ${process.env.NODE_ENV} mode`);
+
 const app = express();
 const port = 3000;
 

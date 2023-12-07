@@ -18,6 +18,7 @@ function LibraryPage() {
   
 
   useEffect(() => {
+    console.log('LibraryPage component mounted')
     
     // Fetch the library items count
     getAllLibraryItemsCount()
@@ -28,8 +29,6 @@ function LibraryPage() {
       .catch((error) => {
         console.error('Error fetching library items count:', error)
       })
-
-    
   
     // Fetch library items
     getLibraryCards(pageNumber)
