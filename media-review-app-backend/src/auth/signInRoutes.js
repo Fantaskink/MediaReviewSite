@@ -22,7 +22,7 @@ router.post('/signin', async (req, res) => {
       });
     } catch (error) {
       // Handle errors and send appropriate error responses to the frontend
-      res.status(400).json({ error: error.message }); // Sending the error message to the frontend
+      res.status(400).json({ error: "Incorrect credentials" }); // Sending the error message to the frontend
     }
   } );
 
