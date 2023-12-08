@@ -5,7 +5,7 @@ import './FilmPage.css'
 
 interface Film {
   media_id: number;
-  media_url: string;
+  slug: string;
   title: string;
   director: string;
   thumbnail_url: string;
@@ -16,16 +16,16 @@ interface Film {
 }
 
 function FilmPage() {
-  // The film id from the route path `/film/:id`
-  const { id } = useParams<{ id: string}>()
+  // The film id from the route path `/film/:slug`
+  const { slug } = useParams<{ slug: string}>()
 
   const [film, setFilm] = useState<Film | undefined>(undefined)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (id) {
+    if (slug) {
     // Fetch the film data from the API
-      getFilmData(id)
+      getFilmData(slug)
         .then((data) => {
         // Update the state with the fetched film data
           setFilm(data[0])
@@ -35,7 +35,7 @@ function FilmPage() {
           console.error('Error fetching film data:', error)
         })
     }
-  }, [id]) // Empty dependency array ensures the effect runs only once when the component mounts
+  }, [slug]) // Empty dependency array ensures the effect runs only once when the component mounts
   
 
   if (loading) {

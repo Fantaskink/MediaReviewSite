@@ -1,11 +1,11 @@
 const mediaPool = require('../../db/media_db');
 
-const getFilmData = (filmUrl, callback) => {
+const getFilmData = (slug, callback) => {
     mediaPool.query(
         `SELECT * FROM media, films
          WHERE media.media_id = films.media_id
-         AND media_url = $1`,
-        [filmUrl],
+         AND slug = $1`,
+        [slug],
         (err, res) => {
         if (err) {
             console.error('Error getting film:', err);

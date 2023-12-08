@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import './LibraryPage.css'
 
 interface LibraryItem {
-  media_url: string;
+  slug: string;
   media_id: number;
   title: string;
   thumbnail_url: string;
@@ -68,7 +68,7 @@ function LibraryPage() {
 
       <div className='grid-container'>
         {libraryItems.map((item) => (
-          <Link key={item.media_id} to={`/${item.type}/${item.media_url}`}>
+          <Link key={item.media_id} to={`/${item.type}/${item.slug}`}>
             <div className='grid-item'>
               <img
                 className='grid-item-image'

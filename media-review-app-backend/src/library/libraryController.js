@@ -4,7 +4,7 @@ const mediaPool = require('../db/media_db');
 const getLibraryCards = (pageNumber, callback) => {
     const offset = (pageNumber - 1) * 72;
     mediaPool.query(
-        `SELECT media_id, media_url, title, thumbnail_url, type FROM media
+        `SELECT media_id, slug, title, thumbnail_url, type FROM media
          ORDER BY title ASC LIMIT 72 OFFSET ${offset}`,
         (err, res) => {
             if (err) {
@@ -49,12 +49,12 @@ const getAllMedia = (callback) => {
     );
   };
   
-const addFilm = (media_url, title, thumbnail_url, description, director, year, callback) => {
+const addFilm = (slug, title, thumbnail_url, description, director, year, callback) => {
     mediaPool.query(
-      `INSERT INTO media (media_url, title, thumbnail_url, description, type, year)
+      `INSERT INTO media (slug, title, thumbnail_url, description, type, year)
        VALUES ($1, $2, $3, $4, 'film', $5)
        RETURNING media_id`,
-      [media_url, title, thumbnail_url, description, year],
+      [slug, title, thumbnail_url, description, year],
       (err, res) => {
         if (err) {
           console.error('Error inserting film:', err);
@@ -80,12 +80,12 @@ const addFilm = (media_url, title, thumbnail_url, description, director, year, c
     );
   };
   
-  const addBook = (media_url, title, thumbnail_url, description, author, year, callback) => {
+  const addBook = (slug, title, thumbnail_url, description, author, year, callback) => {
     mediaPool.query(
-      `INSERT INTO media (media_url, title, thumbnail_url, description, type, year)
+      `INSERT INTO media (slug, title, thumbnail_url, description, type, year)
        VALUES ($1, $2, $3, $4, 'book', $5)
        RETURNING media_id`,
-      [media_url, title, thumbnail_url, description, year],
+      [slug, title, thumbnail_url, description, year],
       (err, res) => {
         if (err) {
           console.error('Error inserting book:', err);
