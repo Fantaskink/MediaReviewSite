@@ -1,31 +1,69 @@
-import { useState } from 'react'
+import { useState} from 'react'
 import { signUp } from './SignUpAPI'
-
-interface User {
-    username: string;
-    email_address: string;
-    password: string;
-}
+import FormInput from './FormInput' 
+import { AxiosError } from 'axios'
+import './SignUpPage.css'
 
 const SignUpPage: React.FC = () => {
-  const [formData, setFormData] = useState<User>({
+  const [values, setValues] = useState({
     username: '',
     email_address: '',
     password: '',
+    confirmPassword: '',
   })
+  
+  const inputs = [
+    {
+      id: 1,
+      name: 'username',
+      type: 'text',
+      placeholder: 'Username',
+      errorMessage: 'Username should be between 3 and 20 characters and shouldn\'t contain special characters',
+      label: 'Username',
+      pattern: '^[a-zA-Z0-9]{3,20}$',
+      required: true,
+    },
+    {
+      id: 2,
+      name: 'email_address',
+      type: 'email',
+      placeholder: 'Email',
+      errorMessage: 'A valid email address is required',
+      label: 'Email',
+      required: true,
+    },
+    {
+      id: 3,
+      name: 'password',
+      type: 'password',
+      placeholder: 'Password',
+      errorMessage: 'Password must be at least 8 characters long and contain at least one number',
+      label: 'Password',
+      pattern: '^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$',
+      required: true,
+    },
+    {
+      id: 4,
+      name: 'confirmPassword',
+      type: 'password',
+      placeholder: 'Confirm Password',
+      errorMessage: 'Passwords must match',
+      label: 'Confirm Password',
+      pattern: values.password,
+      required: true,
+    },
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData({
-      ...formData,
-      [name]: value,
-    })
-  }
+  ]
 
-  const handleSubmit = async (e: React.FormEvent) => {
+
+  const handleSubmit = async (e) => {
     
     e.preventDefault()
-
+    const formData = {
+      username: e.target.username.value,
+      email_address: e.target.email_address.value,
+      password: e.target.password.value,
+    }
     // Check if any of the form fields are empty
     if (!formData.username || !formData.email_address || !formData.password) {
       alert('All fields are required')
@@ -36,53 +74,31 @@ const SignUpPage: React.FC = () => {
 
     try {
       await signUp(formData)
-      setFormData({
-        username: '',
-        email_address: '',
-        password: '',
-      })
       alert('User signed up successfully!')
-    } catch (error) {
-      console.error('Error signing up:', error)
-      
+    } catch (error: unknown) {
+      if (typeof error === 'object' && error !== null) {
+        const axiosError = error as AxiosError<{ error: string }>
+        console.error('Error signing in:', axiosError?.response?.data?.error)
+        alert(`Error signing in: ${axiosError?.response?.data?.error}`)
+      }
     }
   }
+
+  const onChange = (e) => {
+    setValues({...values, [e.target.name]: e.target.value})
+  }
+
+  console.log(values)
     
   return (
-    <div>
-      <h1>Sign Up</h1>
-      <form>
-        <div>
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={formData.username}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="email_address">Email</label>
-          <input
-            type="text"
-            id="email_address"
-            name="email_address"
-            value={formData.email_address}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleInputChange}
-          />
-        </div>
-        <button onClick={handleSubmit}>Sign Up</button>
+    <div className='sign-up-page'>
+      <form className='sign-up-form' onSubmit={handleSubmit}>
+        <h1>Register account</h1>
+        {inputs.map((input) => (
+          <FormInput key={input.id} {...input} value={values[input.name]} 
+            onChange={onChange}/>
+        ))}
+        <button className='sign-up-button'>Sign Up</button>
       </form>
     </div>
   )

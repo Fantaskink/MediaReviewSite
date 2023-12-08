@@ -1,0 +1,35 @@
+.sign-up-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.sign-up-form {
+    width: 600px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+h1 {
+    text-align: center;
+    
+}
+
+.sign-up-button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: lightgreen;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.sign-up-button:hover {
+    background-color: green;
+}
