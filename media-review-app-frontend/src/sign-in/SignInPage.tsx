@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { signIn } from './SignInAPI'
+import { useContext } from 'react'
+import { AuthContext } from '../authcontext/AuthContext'
 import { AxiosError } from 'axios'
 
 interface User {
@@ -25,8 +27,9 @@ const SignInPage: React.FC = () => {
     })
   }
 
+  const { setLoggedIn } = useContext(AuthContext)
+
   const handleSubmit = async (e: React.FormEvent) => {
-    
     e.preventDefault()
 
     // Check if any of the form fields are empty
@@ -40,6 +43,7 @@ const SignInPage: React.FC = () => {
     try {
       const response = await signIn(formData)
       if (response.token) {
+        setLoggedIn(true)
         navigate('/')
       }
       setFormData({

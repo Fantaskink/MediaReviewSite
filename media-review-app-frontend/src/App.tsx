@@ -1,6 +1,9 @@
+import { useEffect, useState } from 'react'
+import Cookies from 'js-cookie'
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { AuthContext } from './authcontext/AuthContext'
 
 import NavigationBar from './navigation/NavigationBar'
 import LibraryPage from './library/LibraryPage'
@@ -13,21 +16,29 @@ import AddBookPage from './libraryadmin/AddBookPage'
 import FilmPage from './library/film/FilmPage'
 
 function App() {
+  const [isLoggedIn, setLoggedIn] = useState(false)
+
+  useEffect(() => {
+    const token = Cookies.get('access_token')
+    setLoggedIn(!!token)
+  }, [])
 
   return (
     <>
-      <NavigationBar />
+      <AuthContext.Provider value={{ isLoggedIn, setLoggedIn }}>
+        <NavigationBar />
 
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/library" element={<LibraryPage />} />
-        <Route path="/film/:slug" element={<FilmPage />} />
-        <Route path="/sign-in" element={<SignInPage />} />
-        <Route path="/sign-up" element={<SignUpPage />} />
-        <Route path="/admin" element={<AdminPage />} />
-        <Route path="/admin/addbookpage" element={<AddBookPage />} />
-        <Route path="/admin/addfilmpage" element={<AddFilmPage />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/library" element={<LibraryPage />} />
+          <Route path="/film/:slug" element={<FilmPage />} />
+          <Route path="/sign-in" element={<SignInPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/addbookpage" element={<AddBookPage />} />
+          <Route path="/admin/addfilmpage" element={<AddFilmPage />} />
+        </Routes>
+      </AuthContext.Provider>
     </>
   )
 }
