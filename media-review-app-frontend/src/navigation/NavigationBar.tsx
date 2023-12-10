@@ -5,8 +5,7 @@ import { useContext } from 'react'
 import { AuthContext } from '../authcontext/AuthContext'
 
 function NavigationBar() {
-  const { isLoggedIn } = useContext(AuthContext)
-  
+  const { isLoggedIn, userName } = useContext(AuthContext)
 
   return (
     <Navbar bg="dark" variant="dark">
@@ -17,6 +16,7 @@ function NavigationBar() {
           <Nav.Link href="/library">Library</Nav.Link>
           {!isLoggedIn && <Nav.Link href="/sign-in">Sign In</Nav.Link>}
           {!isLoggedIn && <Nav.Link href="/sign-up">Sign Up</Nav.Link>}
+          {isLoggedIn && <Nav.Link href={`/member/${userName}`}>{userName}</Nav.Link>}
           <Nav.Link href="/admin">Admin</Nav.Link>
         </Nav>
       </Container>

@@ -14,9 +14,11 @@ import AdminPage from './libraryadmin/AdminPage'
 import AddFilmPage from './libraryadmin/AddFilmPage'
 import AddBookPage from './libraryadmin/AddBookPage'
 import FilmPage from './library/film/FilmPage'
+import ProfilePage from './profile/ProfilePage'
 
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false)
+  const [userName, setUserName] = useState('')
 
   useEffect(() => {
     const token = Cookies.get('access_token')
@@ -25,7 +27,7 @@ function App() {
 
   return (
     <>
-      <AuthContext.Provider value={{ isLoggedIn, setLoggedIn }}>
+      <AuthContext.Provider value={{ isLoggedIn, setLoggedIn, userName, setUserName}}>
         <NavigationBar />
 
         <Routes>
@@ -37,6 +39,7 @@ function App() {
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/admin/addbookpage" element={<AddBookPage />} />
           <Route path="/admin/addfilmpage" element={<AddFilmPage />} />
+          <Route path="/member/:slug" element={<ProfilePage />} />
         </Routes>
       </AuthContext.Provider>
     </>

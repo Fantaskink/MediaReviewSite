@@ -28,6 +28,7 @@ const SignInPage: React.FC = () => {
   }
 
   const { setLoggedIn } = useContext(AuthContext)
+  const { setUserName } = useContext(AuthContext)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -44,6 +45,7 @@ const SignInPage: React.FC = () => {
       const response = await signIn(formData)
       if (response.token) {
         setLoggedIn(true)
+        setUserName(response.user.username)
         navigate('/')
       }
       setFormData({
