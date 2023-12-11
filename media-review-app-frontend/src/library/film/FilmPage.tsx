@@ -28,7 +28,7 @@ function FilmPage() {
       getFilmData(slug)
         .then((data) => {
         // Update the state with the fetched film data
-          setFilm(data[0])
+          setFilm(data)
           setLoading(false)
         })
         .catch((error) => {

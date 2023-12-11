@@ -46,6 +46,7 @@ const SignInPage: React.FC = () => {
       if (response.token) {
         setLoggedIn(true)
         setUserName(response.user.username)
+        localStorage.setItem('userName', response.user.username)
         navigate('/')
       }
       setFormData({

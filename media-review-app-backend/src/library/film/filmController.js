@@ -12,7 +12,7 @@ const getFilmData = (slug, callback) => {
             callback(err, null);
         } else {
             console.log('Got film:', res.rows);
-            callback(null, res.rows);
+            callback(null, res.rows[0]);
         }
         }
     );

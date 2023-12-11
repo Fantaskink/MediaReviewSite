@@ -18,7 +18,7 @@ import ProfilePage from './profile/ProfilePage'
 
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false)
-  const [userName, setUserName] = useState('')
+  const [userName, setUserName] = useState(localStorage.getItem('userName') || '')
 
   useEffect(() => {
     const token = Cookies.get('access_token')
