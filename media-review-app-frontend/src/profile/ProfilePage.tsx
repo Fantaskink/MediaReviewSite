@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react'
 
 interface User {
     username: string;
-    email: string;
+    email_address: string;
+    created_at: string;
 }
 
 function ProfilePage() {
@@ -34,7 +35,8 @@ function ProfilePage() {
   return (
     <div>
       <h1>{user?.username}</h1>
-      <p>{user?.email}</p>
+      <p>{user?.email_address}</p>
+      <p>{'Joined ' + user?.created_at.substring(0, 10)}</p>
     </div>
   )
 }

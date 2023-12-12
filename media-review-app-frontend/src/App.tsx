@@ -15,6 +15,7 @@ import AddFilmPage from './libraryadmin/AddFilmPage'
 import AddBookPage from './libraryadmin/AddBookPage'
 import FilmPage from './library/film/FilmPage'
 import ProfilePage from './profile/ProfilePage'
+import MembersPage from './members/MembersPage'
 
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false)
@@ -40,6 +41,7 @@ function App() {
           <Route path="/admin/addbookpage" element={<AddBookPage />} />
           <Route path="/admin/addfilmpage" element={<AddFilmPage />} />
           <Route path="/member/:slug" element={<ProfilePage />} />
+          <Route path="/members" element={<MembersPage />} />
         </Routes>
       </AuthContext.Provider>
     </>

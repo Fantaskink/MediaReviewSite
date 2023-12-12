@@ -1,0 +1,11 @@
+/* Styles for the circular profile picture */
+.member-profile-picture{
+    width: 150px; /* Set the width and height of the profile picture */
+    height: 150px;
+    border-radius: 50%; /* Makes the element a circle */
+    background-size: cover; /* Ensures the image covers the entire container */
+    background-position: center; /* Centers the image within the container */
+    border: 2px solid #fff; /* Optional: Add a border */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Optional: Add a box shadow */
+  }
+  

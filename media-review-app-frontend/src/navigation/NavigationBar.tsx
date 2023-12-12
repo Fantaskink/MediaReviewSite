@@ -17,6 +17,7 @@ function NavigationBar() {
           {!isLoggedIn && <Nav.Link href="/sign-in">Sign In</Nav.Link>}
           {!isLoggedIn && <Nav.Link href="/sign-up">Sign Up</Nav.Link>}
           {isLoggedIn && <Nav.Link href={`/member/${userName}`}>{userName}</Nav.Link>}
+          <Nav.Link href='/members'>Members</Nav.Link>
           <Nav.Link href="/admin">Admin</Nav.Link>
         </Nav>
       </Container>
